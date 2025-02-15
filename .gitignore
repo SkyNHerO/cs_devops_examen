@@ -1,0 +1,34 @@
+# Dependencias de Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.bun/
+
+# Archivos de entorno
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Caché y logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+.bun-debug.log*
+.bun-cache/
+
+# Directorios de compilación
+dist/
+build/
+.tmp/
+.cache/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+*.swp
