@@ -5,5 +5,3 @@ CREATE TABLE IF NOT EXISTS usuarios (
     edad INT,
     sexo CHAR(1)
 );
-
-INSERT INTO usuarios (nombre, apellido, edad, sexo) VALUES ('Maria', 'Rojas', 30, 'F');

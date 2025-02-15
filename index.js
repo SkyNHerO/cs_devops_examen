@@ -11,13 +11,24 @@ const drivers = {
     mongo: require('./drivers/mongoDriver')
 };
 
-const driver = new drivers[process.env.MY_DATABASE_DRIVER]({
+const driver = new drivers[process.env.MY_DATABASE_DRIVER]
+({
     DB_HOST: process.env.DB_HOST,
     DB_USER_NAME: process.env.DB_USER_NAME,
     DB_PASSWORD: process.env.DB_PASSWORD,
     DB_NAME: process.env.DB_NAME,
     DB_PORT: process.env.DB_PORT,
 });
+
+// const DriverClass = drivers[process.env.MY_DATABASE_DRIVER];
+// const driver = new DriverClass({
+//     DB_HOST: process.env.DB_HOST,
+//     DB_USER_NAME: process.env.DB_USER_NAME,
+//     DB_PASSWORD: process.env.DB_PASSWORD,
+//     DB_NAME: process.env.DB_NAME,
+//     DB_PORT: process.env.DB_PORT,
+// });
+
 
 (async () => {
     await driver.connect();
