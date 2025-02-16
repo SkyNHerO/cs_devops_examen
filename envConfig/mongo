@@ -1,4 +1,3 @@
-
 MY_DATABASE_DRIVER=mongo
 DB_HOST=localhost
 DB_USER_NAME=root

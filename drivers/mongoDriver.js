@@ -6,12 +6,20 @@ class MongoDriver {
     }
 
     async connect() {
-        const uri = `mongodb://${this.config.DB_HOST}:${this.config.DB_PORT}`;
-        this.client = new MongoClient(uri);
-        await this.client.connect();
+        const uri = `mongodb://${this.config.DB_USER_NAME}:${this.config.DB_PASSWORD}@${this.config.DB_HOST}:${this.config.DB_PORT}/?authSource=admin`;
 
-        this.db = this.client.db('database');
-        this.collection = this.db.collection('usuarios');
+        this.client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+        try {
+            await this.client.connect();
+            console.log('✅ Conectado a MongoDB');
+
+            this.db = this.client.db(this.config.DB_NAME);
+            this.collection = this.db.collection('usuarios');
+
+        } catch (error) {
+            console.error('❌ Error conectando a MongoDB:', error);
+        }
     }
 
     async getAllUsers() {

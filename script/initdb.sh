@@ -16,16 +16,19 @@ if [ -z "$MY_DATABASE_DRIVER" ]; then
 fi
 
 if [ "$MY_DATABASE_DRIVER" == "mongo" ]; then
-    until mongosh --host "$DB_HOST" --eval "print('Esperando a que levante mongo..')" &>/dev/null; do
+    until mongosh --host "$DB_HOST" --eval "print('Esperando a que levante MongoDB...')" &>/dev/null; do
         sleep 3
     done
 
-    exec mongosh --host "$DB_HOST" <<EOF
-use $DB_NAME
-db.usuarios.insertMany($(cat /data/mongo.json))
-EOF
+    JSON_DATA=$(cat /data/mongo.json | jq -c .)
+    
+    mongosh --host "$DB_HOST" -u "$DB_USER_NAME" -p "$DB_PASSWORD" --authenticationDatabase admin --eval "
+        use $DB_NAME;
+        db.usuarios.insertMany($JSON_DATA);
+    "
 
     echo "Datos importados correctamente en MongoDB"
+fi
 
 elif [ "$MY_DATABASE_DRIVER" == "mysql" ]; then
     until docker exec mysql mysqladmin ping -h"$DB_HOST" --silent; do
