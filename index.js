@@ -56,6 +56,6 @@ const driver = new drivers[process.env.MY_DATABASE_DRIVER]
         });
     });
 
-    app.listen(3000, () => console.log('Server corriendo en el puerto 3000'));
+    app.listen(3001, () => console.log('Server corriendo en el puerto 3001'));
 
 })();

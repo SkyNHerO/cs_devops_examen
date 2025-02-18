@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: backend-namespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: skynhero/cs_devops_examen
+        ports:
+        - containerPort: 3001
+        envFrom:
+        - configMapRef:
+            name: backend-config  # Se debe referenciar el ConfigMap
+        - secretRef:
+            name: db-secret  # Se debe referenciar el Secret para DB_PASSWORD

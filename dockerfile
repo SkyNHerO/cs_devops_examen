@@ -13,8 +13,8 @@ RUN npm install
 # Copiar todo el código fuente del proyecto al contenedor
 COPY . .
 
-# Exponer el puerto 3000
-EXPOSE 3000
+# Exponer el puerto 3001
+EXPOSE 3001
 
 # Comando para ejecutar la aplicación
 CMD ["node", "index.js"]

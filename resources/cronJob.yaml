@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: db-backup-cronjob
+spec:
+  schedule: "0 */3 * * *"  # Cada 3 horas
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: db-backup-container
+            image: amazon/aws-cli:latest  # Imagen que ya tiene AWS CLI
+            command: ["/bin/sh", "-c", "bash /scripts/backup.sh"]
+            envFrom:
+            - secretRef:
+                name: db-secret
+          restartPolicy: OnFailure
